@@ -2,6 +2,7 @@ package main
 
 import (
 	"donationapp/controllers"
+	"donationapp/middleware"
 	"donationapp/models"
 
 	"github.com/gin-gonic/gin"
@@ -14,6 +15,9 @@ func main() {
 	}
 
 	r := gin.Default()
+
+	// 注册中间件
+	r.Use(middleware.AuthMiddleware())
 	//注册API路由
 	user := r.Group("/api/user")
 	user.POST("/register", controllers.Register)
